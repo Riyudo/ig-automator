@@ -2,10 +2,21 @@ from logic import Logic
 
 
 def main():
-    logicTest = Logic()
-    #logicTest.clientInfo() haneul's pk: 47635781514
-    print( logicTest.get_pk(input("Username: ")) )
-    logicTest.api.logout()
+    #START
+    logic = Logic()
+    #haneul's pk: 47635781514
+    logic.clientInfo()
+
+
+
+    #TESTING USER.PY
+    info_list = logic.get_userinfo('haneul.exe')
+    user = logic.create_user(info_list)
+    user.print_userinfo()
+
+
+    #LOGOUT
+    logic.api.logout()
     return
 
 
