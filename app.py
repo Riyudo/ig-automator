@@ -2,10 +2,9 @@ from logic import Logic
 
 
 def main():
-    print("Before the constructor")
     logicTest = Logic()
-    logicTest.welcome()
-    logicTest.clientInfo()
+    #logicTest.clientInfo() haneul's pk: 47635781514
+    print( logicTest.get_pk(input("Username: ")) )
     logicTest.api.logout()
     return
 
