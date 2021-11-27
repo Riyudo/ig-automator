@@ -7,23 +7,29 @@ class Logic():
         self.user_name = credentials[0]
         self.password = credentials[1]
         self.api = Client(self.user_name, self.password)
+        self.uuid = self.api.generate_uuid()
         self.welcome()
     
     def clientInfo(self):
         user_info = self.api.username_info(self.user_name)["user"]
-        print(user_info)
-        user_info_separated = []
-        for attribute in user_info:
-            user_info_separated.append(attribute)
-            print(attribute) 
-            
-        print(user_info[attribute])
-
+        return user_info
 
     def get_pk(self, username):
-        "Receives pk from user"
+        "Returns private key from user"
         info = self.api.username_info(username)["user"]
+        return info['pk']
         #print(info['pk'])
+
+    def get_my_following(self):
+        "Returns username's following"
+        followers = self.api.user_following(self.clientInfo()['pk'], self.uuid, count = self.clientInfo()['following_count'])
+        print("Following count: ", self.clientInfo()['following_count'])
+
+    def get_my_followers(self):
+        "Returns client's followers"
+
+        followers = self.api.user_followers(self.clientInfo()['pk'], self.uuid, count = self.clientInfo()['follower_count'])
+        print("Follower count: ", self.clientInfo()['follower_count'])
 
     def get_userinfo(self, username):
         info = self.api.username_info(username)["user"]
